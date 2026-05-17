@@ -1,3 +1,20 @@
-.DS_Store
+# Python
 __pycache__/
 *.pyc
+*.pyo
+.Python
+
+# Virtual environments
+.env
+.venv
+env/
+
+# Mac
+.DS_Store
+.AppleDouble
+
+# VS Code
+.vscode/settings.json
+
+# Jupyter
+.ipynb_checkpoints/
