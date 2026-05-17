@@ -1,20 +1,28 @@
-echo "# DS Starter - World Population Analysis
+# DS Foundations — 30 Day Data Science Journey
 
-Analyses world population data (World Bank) to find the top 10 most populous countries in 2024.
+A structured 30-day hands-on data science learning project.
+Each day covers a new concept, always ending with a git commit.
 
-## What it does
-- Loads data directly from a public CSV URL
-- Cleans out World Bank aggregate groups (keeps only real countries)
-- Prints a summary table in the terminal
-- Saves a bar chart as top10_population.png
+## Progress
 
-## How to run
-\`\`\`
+| Day | Topic | File |
+|-----|-------|------|
+| 1 | World population analysis | analysis.py |
+| 2 | Titanic EDA — survival analysis | titanic.py |
+| 3 | Netflix content analysis | netflix.py |
+| 4 | Data cleaning | cleaning.py |
+| 5 | Visualisation — 6 chart types | visualisation.py |
+| 6 | Git — branches, merge, workflow | — |
+
+## Setup
+
+```bash
 conda activate ds-starter
-python analysis.py
-\`\`\`
+python <filename>.py
+```
 
-## Libraries used
-- pandas
-- matplotlib
-" > README.md
+## Tools used
+- Python 3.11
+- pandas, matplotlib, seaborn
+- conda virtual environment
+- git + GitHub
