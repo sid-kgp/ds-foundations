@@ -80,3 +80,69 @@ print(f"After Cleaning:  {after_shape}")
 
 print("\nMissing Values After Cleaning:")
 print(df.isnull().sum())
+
+#Section 4
+import matplotlib.pyplot as plt
+import seaborn as sns
+
+plt.figure(figsize=(14, 10))
+plt.suptitle('Titanic Survival Analysis', fontsize=16, y=1.02)
+
+# Subplot 1: Survival Count (Bar Chart)
+plt.subplot(2, 2, 1)
+sns.countplot(x='Survived', data=df, palette='viridis')
+plt.title('Survival Count (0=No, 1=Yes)')
+plt.xlabel('Survived')
+plt.ylabel('Count')
+plt.xticks([0, 1], ['No', 'Yes'])
+
+# Subplot 2: Survival by Gender (Bar Chart)
+plt.subplot(2, 2, 2)
+survival_by_gender = df.groupby('Sex')['Survived'].mean().reset_index()
+sns.barplot(x='Sex', y='Survived', data=survival_by_gender, palette='plasma')
+plt.title('Survival Rate by Gender')
+plt.xlabel('Gender')
+plt.ylabel('Survival Rate')
+plt.ylim(0, 1) # Set y-axis limit for proportion
+
+# Subplot 3: Survival by Class (Bar Chart)
+plt.subplot(2, 2, 3)
+survival_by_class = df.groupby('Pclass')['Survived'].mean().reset_index()
+sns.barplot(x='Pclass', y='Survived', data=survival_by_class, palette='coolwarm')
+plt.title('Survival Rate by Passenger Class')
+plt.xlabel('Passenger Class')
+plt.ylabel('Survival Rate')
+plt.ylim(0, 1) # Set y-axis limit for proportion
+
+# Subplot 4: Age Distribution of Survivors vs Non-Survivors (Histogram)
+plt.subplot(2, 2, 4)
+sns.histplot(df[df['Survived'] == 1]['Age'].dropna(), color='skyblue', label='Survived', kde=True)
+sns.histplot(df[df['Survived'] == 0]['Age'].dropna(), color='orange', label='Non-Survived', kde=True)
+plt.title('Age Distribution: Survivors vs Non-Survivors')
+plt.xlabel('Age')
+plt.ylabel('Count')
+plt.legend()
+
+plt.tight_layout(rect=[0, 0.03, 1, 0.98]) # Adjust layout to prevent title overlap
+plt.savefig("titanic_eda_charts.png")
+plt.show()
+
+# ── SECTION 5: KEY FINDINGS ──────────────────────────────
+print("\n" + "=" * 55)
+print("KEY FINDINGS SUMMARY")
+print("=" * 55)
+print(f"""
+- Overall survival rate was only 38.4% — less than 4 in 10 survived
+
+- Gender was the strongest predictor: 74% of women survived
+  vs only 19% of men — "women and children first" was real
+
+- Wealth determined survival: 1st class (63%) had 2.6x better
+  odds than 3rd class (24%)
+
+- Survivors were slightly younger (avg 28.3) vs non-survivors
+  (avg 30.6) — children were prioritised in lifeboats
+
+- 77% of Cabin data was missing — likely because most 3rd class
+  passengers had no assigned cabin, linking missingness to class
+""")
