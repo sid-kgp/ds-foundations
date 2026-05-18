@@ -50,3 +50,33 @@ average_age_survived = df[df['Survived'] == 1]['Age'].mean()
 average_age_not_survived = df[df['Survived'] == 0]['Age'].mean()
 print(f"\nAverage Age of Survivors: {average_age_survived:.2f}")
 print(f"Average Age of Non-Survivors: {average_age_not_survived:.2f}")
+
+#Section 3
+#Fill missing ages with the median. Drop rows where Embarked is missing. Drop the Cabin column (too many missing values — 77%)   
+
+#Section 3
+# ── 1. Fill missing ages with the median. Drop rows where Embarked is missing. Drop the Cabin column (too many missing values — 77%) ──────────────────────
+# ── 2. STORE SHAPE BEFORE CLEANING ──────────────────────
+before_shape = df.shape
+
+# ── 3. CLEANING ──────────────────────────────────────────
+
+# Fill missing Age values with median
+df['Age'] = df['Age'].fillna(df['Age'].median())
+
+# Drop rows where Embarked is missing
+df.dropna(subset=['Embarked'], inplace=True)
+
+# Drop Cabin column completely
+df.drop(columns=['Cabin'], inplace=True)
+
+# ── 4. STORE SHAPE AFTER CLEANING ───────────────────────
+after_shape = df.shape
+
+# ── 5. PRINT RESULTS ────────────────────────────────────
+print("Dataset Shape Comparison")
+print(f"Before Cleaning: {before_shape}")
+print(f"After Cleaning:  {after_shape}")
+
+print("\nMissing Values After Cleaning:")
+print(df.isnull().sum())
